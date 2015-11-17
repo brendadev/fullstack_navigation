@@ -4,11 +4,13 @@ define([
     'jquery',
     'underscore',
     'backbone',
+    'masonry',
     'collections/insurance.data.collection',
     'models/insurance.data.model',
-    'views/insurance.graph.view'
+    'views/insurance.graph.view',
+    'views/side.menu.view'
 ], function(
-        $,_,Backbone,InsuranceDataCollection,InsuranceDataModel,InsuranceGraphView
+        $,_,Backbone,Masonry,InsuranceDataCollection,InsuranceDataModel,InsuranceGraphView,SideMenuView
     ){
     var AppView = Backbone.View.extend({
         el: $('#myApp'),
@@ -17,8 +19,17 @@ define([
             this.insuranceData = new InsuranceDataCollection();
             this.insuranceData.bind('sync',this.procData,this);
             this.insuranceData.fetch({cache:false});
+            this.subViews = new Array();
         },
         procData:function(){
+            _.each(this.subViews, function(v){
+                window.utils.cleanView(v);
+            });
+            //add side menu
+            var sideMenuView = new SideMenuView();
+            this.subViews.push(sideMenuView);
+            this.$('.leftNav').append(sideMenuView.render().el);
+
             //console.log(this);
             //calculate insurance/uninsured values
             this.insuranceData.each(function(model){
@@ -28,8 +39,8 @@ define([
             // instantiate views
             var newGraphView = new InsuranceGraphView({collection: this.insuranceData,graphTypeOption: "line"});
             this.$('.main').append(newGraphView.render().el);
-            newGraphView = new InsuranceGraphView({collection: this.insuranceData,graphTypeOption: "bar"});
-            this.$('.main').append(newGraphView.render().el);
+            //newGraphView = new InsuranceGraphView({collection: this.insuranceData,graphTypeOption: "bar"});
+            //this.$('.main').append(newGraphView.render().el);
         },
         render: function () {
             //var insuranceView = new InsuranceView();

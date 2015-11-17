@@ -4,10 +4,12 @@ define([
     'jquery',
     'underscore',
     'backbone',
+    'models/utils.model',
     'views/app.view'
 ], function(
-    $, _, Backbone,AppView
+    $, _, Backbone,UtilsModel,AppView
 ){
+    window.utils = new UtilsModel();
     var AppRouter = Backbone.Router.extend({
         routes: {
             '*actions': 'defaultAction'

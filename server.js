@@ -2,8 +2,12 @@
 (function(){
     var express = require('express'),
        http = require('http'),
+        request = require('request'),
         cookieParser = require('cookie-parser'),
         bodyParser = require('body-parser');
+
+    var Utils = require('./server_libs/utils.js').Utils;
+    var utils = new Utils();
 
     var app = express();
 
@@ -13,7 +17,7 @@
     app.use(express.static(__dirname + '/public'));
 
     // defining access to router
-    var insurance = require('./server_routes/insurance.js')(app);
+    var insurance = require('./server_routes/insurance.js')(app,utils);
     // re-routing to /insurance server router file
     app.get('/', function(req, res){
         //res.send("Hello World!");

@@ -8,9 +8,12 @@ define([
     'collections/insurance.data.collection',
     'models/insurance.data.model',
     'views/insurance.graph.view',
-    'views/side.menu.view'
+    'views/side.menu.view',
+    'views/page.flow.view'
 ], function(
-        $,_,Backbone,Masonry,InsuranceDataCollection,InsuranceDataModel,InsuranceGraphView,SideMenuView
+        $,_,Backbone,Masonry,InsuranceDataCollection,
+        InsuranceDataModel,InsuranceGraphView,SideMenuView,
+        PageFlowView
     ){
     var AppView = Backbone.View.extend({
         el: $('#myApp'),
@@ -37,10 +40,16 @@ define([
                 model.set({'percentInsured': (model.attributes.number_insured/model.attributes.population)*100});
             },this);
             // instantiate views
-            var newGraphView = new InsuranceGraphView({collection: this.insuranceData,graphTypeOption: "line"});
-            this.$('.main').append(newGraphView.render().el);
+            //var newGraphView = new InsuranceGraphView({collection: this.insuranceData,graphTypeOption: "line"});
+            //this.$('.main').append(newGraphView.render().el);
             //newGraphView = new InsuranceGraphView({collection: this.insuranceData,graphTypeOption: "bar"});
             //this.$('.main').append(newGraphView.render().el);
+
+            // requires /public/views/page.flow.view.js
+            var pageFlowView = new PageFlowView();
+            this.subViews.push(pageFlowView);
+
+            this.$('.main').append(pageFlowView.render().el);
         },
         render: function () {
             //var insuranceView = new InsuranceView();

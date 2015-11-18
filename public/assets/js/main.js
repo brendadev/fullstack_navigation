@@ -7,6 +7,8 @@ require.config({
         masonry         : 'libs/masonry/masonry',
         underscore      : 'libs/underscore/underscore',
         backbone        : 'libs/backbone/backbone',
+        scrollbar       : 'libs/perfect-scrollbar/perfect-scrollbar.jquery',
+        jscrollbar      : 'libs/perfect-scrollbar/perfect-scrollbar',
         highchart       : 'libs/highchart/highcharts',
         templates       : '../templates'
     }

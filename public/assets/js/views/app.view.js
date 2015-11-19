@@ -17,10 +17,11 @@ define([
         el: $('#myApp'),
         initialize: function () {
             //instantiating collection, so all views have access to this
-            this.insuranceData = new InsuranceDataCollection();
-            this.insuranceData.bind('sync',this.procData,this);
-            this.insuranceData.fetch({cache:false});
+            //this.insuranceData = new InsuranceDataCollection();
+            //this.insuranceData.bind('sync',this.procData,this);
+            //this.insuranceData.fetch({cache:false});
             this.subViews = new Array();
+            this.procData();
         },
         procData:function(){
             _.each(this.subViews, function(v){
@@ -33,10 +34,10 @@ define([
 
             //console.log(this);
             //calculate insurance/uninsured values
-            this.insuranceData.each(function(model){
-                model.set({'percentUninsured': (model.attributes.number_uninsured/model.attributes.population)*100});
-                model.set({'percentInsured': (model.attributes.number_insured/model.attributes.population)*100});
-            },this);
+            //this.insuranceData.each(function(model){
+            //    model.set({'percentUninsured': (model.attributes.number_uninsured/model.attributes.population)*100});
+            //    model.set({'percentInsured': (model.attributes.number_insured/model.attributes.population)*100});
+            //},this);
             // instantiate views
             //var newGraphView = new InsuranceGraphView({collection: this.insuranceData,graphTypeOption: "line"});
             //this.$('.main').append(newGraphView.render().el);

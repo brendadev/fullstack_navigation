@@ -60,7 +60,7 @@ define([
             if(this.graphType == "line"){
                 $(this.el).highcharts({
                     chart: {
-                        width:1200
+                        width:1100
                     },
                     credits: {
                         enabled: false
@@ -120,7 +120,7 @@ define([
                         type: 'column',
                         height: 700,
                         //backgroundColor:'rgba(0, 0, 0, 0)',
-                        width:1200
+                        width:1100
                     },
                     credits: {
                         enabled: false

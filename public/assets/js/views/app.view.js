@@ -6,14 +6,12 @@ define([
     'backbone',
     'masonry',
     'collections/insurance.data.collection',
-    'models/insurance.data.model',
     'views/insurance.graph.view',
     'views/side.menu.view',
     'views/page.flow.view'
 ], function(
         $,_,Backbone,Masonry,InsuranceDataCollection,
-        InsuranceDataModel,InsuranceGraphView,SideMenuView,
-        PageFlowView
+        InsuranceGraphView,SideMenuView,PageFlowView
     ){
     var AppView = Backbone.View.extend({
         el: $('#myApp'),

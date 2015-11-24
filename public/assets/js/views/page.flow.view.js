@@ -5,10 +5,11 @@ define([
     'moment',
     'collections/insurance.data.collection',
     'views/insurance.graph.view',
+    'views/table.view',
     'text!templates/page.flow.template.html'
 ],function(
     $,_,Backbone,Moment,InsuranceDataCollection,
-    InsuranceGraphView, Template
+    InsuranceGraphView, TableView, Template
     ){
     var PageFlowView = Backbone.View.extend({
         className: 'profile clear pb',
@@ -68,6 +69,8 @@ define([
                     // instantiate views
                     var newGraphView = new InsuranceGraphView({collection: this.insuranceData,graphTypeOption: "line"});
                     this.$('.graph').append(newGraphView.render().el);
+                    var newTableView = TableView({collection: this.insuranceData});
+                    this.$('').append(newTableView.render().el);
                     break;
                 case 1:
                     console.log("Chart + map view");

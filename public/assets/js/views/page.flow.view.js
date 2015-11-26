@@ -31,7 +31,7 @@ define([
             return base;
         },
         initialize: function(){
-            console.log("1.at initialize");
+            //console.log("1.at initialize");
             this.debugName = 'page flow view';
             this.insuranceData = new InsuranceDataCollection();
             this.insuranceData.bind('sync',this.procData,this);
@@ -40,7 +40,7 @@ define([
             this.programIndex = 0;
         },
         procData: function(){
-            console.log("2.at procData");
+            //console.log("2.at procData");
             $(this.el).html(this.template());
 
             //calculate insurance/uninsured values
@@ -59,7 +59,7 @@ define([
             return this;
         },
         loadProgram: function(){
-            console.log("3.at loadProgram");
+            //console.log("3.at loadProgram");
             window.utils.output(this.debugName, 'selected program index is ' + this.programIndex);
             this.programIndex = this.$('#selectProgram')[0].selectedIndex;
             this.cleanUI();
@@ -69,13 +69,16 @@ define([
                     // instantiate views
                     var newGraphView = new InsuranceGraphView({collection: this.insuranceData,graphTypeOption: "line"});
                     this.$('.graph').append(newGraphView.render().el);
+                    this.subViews.push(newGraphView);
                     var newTableView = TableView({collection: this.insuranceData});
-                    this.$('').append(newTableView.render().el);
+                    this.$('.participantList').append(newTableView.render().el);
+                    this.subViews.push(newTableView);
                     break;
                 case 1:
                     console.log("Chart + map view");
                     newGraphView = new InsuranceGraphView({collection: this.insuranceData,graphTypeOption: "bar"});
                     this.$('.graph').append(newGraphView.render().el);
+                    this.subViews.push(newGraphView);
                     break;
                 default:
             }
@@ -83,7 +86,6 @@ define([
             //so that these views can be all cleared with cleanUI
             //in this case, I used this technique to track the graphs and be able to remove
             //the previous one, so a new one could be rendered
-            this.subViews.push(newGraphView);
         },
         loadView: function(){
             console.log("at loadView");

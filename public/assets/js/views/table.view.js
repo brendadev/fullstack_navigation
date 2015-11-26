@@ -7,7 +7,7 @@ define([
     $,_,Backbone,Template
 ){
     var StateTableView = Backbone.View.extend({
-        className: 'panel koneksa_bg_white boxShadow mlrt',
+        className: 'row border_top_gray',
         template:_.template(Template),
         initialize: function(options) {
             this.debugName = 'states table view';

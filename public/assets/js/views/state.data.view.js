@@ -1,13 +1,11 @@
 define([
     'jquery',
     'underscore',
-    'backbone',
-    //'views/state.data.view',
-    'text!templates/table.view.template.html'
+    'backbone'
 ], function(
     $,_,Backbone,Template
 ){
-    var StateTableView = Backbone.View.extend({
+    var StateDataView = Backbone.View.extend({
         className: 'row border_top_gray',
         template:_.template(Template),
         initialize: function(options) {
@@ -22,11 +20,6 @@ define([
         },
         showData:function() {
             var frag = document.createDocumentFragment();
-            console.log(this.data.models);
-            this.columns = [{displayName: "state name"},
-                            {displayName: "insured"},
-                            {displayName: "uninsured"},
-                            {displayName: "population"}];
             _.each(this.columns,function(c){
                 this.hasData = false;
                 var isString = false;
@@ -52,20 +45,7 @@ define([
 
             //this.$('.partShowMore').attr('data','&m=' + this.columns[1].type + '&t=' + this.columns[1].name);
             this.$('.rowData').append(frag);
-
-            //var smv = new StateDataView({
-            //    progId      : this.progId
-            //    ,userId     : this.model.get('userId')
-            //    ,type       : window.utils.getDataParameter(d,'m')
-            //    ,units      : window.utils.getDataParameter(d,'u')
-            //    ,startWeek  : startWeek
-            //    ,endWeek    : endWeek
-            //    ,days       : this.days
-            //    ,startDate      : this.startDate
-            //    ,endDate        : this.endDate
-            //});
-            //this.subviews.push(smv);
         }
     });
-    return StateTableView;
+    return StateDataView;
 });

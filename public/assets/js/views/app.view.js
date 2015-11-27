@@ -46,10 +46,20 @@ define([
 
             // requires /public/views/page.flow.view.js
             var pageFlowView = new PageFlowView();
+            //RE: in general I would push the the subviews array after the view is rendered
+            //RE: this is safer because if an error occurs in the view reneder the subview array
+            //RE: wont contain a broken view
+
             this.subViews.push(pageFlowView);
 
             this.$('.main').append(pageFlowView.render().el);
         },
+        //RE: I would always put the render function after the initialize function
+        //RE: because it is a standard backbone method
+        //RE: initialize and render are the only backbone methods
+        //RE: this means that all the view specific code follows the standard code
+        //RE: which in long lines of code improves readability
+
         render: function () {
             //var insuranceView = new InsuranceView();
             //this.$('main').append(insuranceView.render().el);

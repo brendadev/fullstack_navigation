@@ -31,9 +31,13 @@ define([
                 console.log(c.displayName);
                 switch(c.displayName) {
                     case 'state name':
+                        //RE: the next 2 lines are repeated so can go above _.each(this.columns...
+                        //RE: first to admit I don't always do this myself and should do
                         var d = document.createElement('div');
                         d.className = 'span' + this.columns.length + 'col rowCell left';
                         d.innerHTML = this.model.get('name');
+                        //RE: I would put this next line outside the switch
+                        //RE: so it runs if the switch code works
                         frag.appendChild(d);
                         //console.log(frag);
                         //debugger;
@@ -65,6 +69,7 @@ define([
                         console.log("at default");
                 }
                 //debugger;
+                //RE: if I am not mistaken this line should go outside the _.each
                 $(this.el).append(frag);
             },this);
             //

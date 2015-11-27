@@ -2,10 +2,10 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    //'views/state.data.view',
+    'views/state.data.view',
     'text!templates/table.view.template.html'
 ], function(
-    $,_,Backbone,Template
+    $,_,Backbone,StateDataView,Template
 ){
     var StateTableView = Backbone.View.extend({
         className: 'row border_top_gray',

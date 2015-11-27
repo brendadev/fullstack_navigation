@@ -3,14 +3,13 @@ define([
     'underscore',
     'backbone'
 ], function(
-    $,_,Backbone,Template
+    $,_,Backbone
 ){
     var StateDataView = Backbone.View.extend({
         className: 'row border_top_gray',
-        template:_.template(Template),
-        initialize: function(options) {
+        //template:_.template(Template),
+        initialize: function() {
             this.debugName = 'table view';
-            this.data = options.collection;
             //debugger;
         },
         render: function() {

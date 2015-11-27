@@ -39,7 +39,7 @@ define([
                 frag.appendChild(smv.render().el);
                 this.subViews.push(smv);
             }, this);
-            this.$('.rowIcon').append(frag);
+            this.$('.rowData').append(frag);
         }
     });
     return StateTableView;

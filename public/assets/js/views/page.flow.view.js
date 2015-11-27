@@ -48,7 +48,7 @@ define([
                 model.set({'percentUninsured': (model.attributes.number_uninsured/model.attributes.population)*100});
                 model.set({'percentInsured': (model.attributes.number_insured/model.attributes.population)*100});
             },this);
-            console.log(this.insuranceData);
+            //console.log(this.insuranceData);
             if (window.utils.getQueryStringParameter('viewid') != '') {
                 this.programIndex=window.utils.getQueryStringParameter('viewid');
                 this.loadView();
@@ -70,8 +70,9 @@ define([
                     var newGraphView = new InsuranceGraphView({collection: this.insuranceData,graphTypeOption: "line"});
                     this.$('.graph').append(newGraphView.render().el);
                     this.subViews.push(newGraphView);
+                    //debugger;
                     var newTableView = new TableView({collection: this.insuranceData});
-                    this.$('.rowData').append(newTableView.render().el);
+                    this.$('.participantList').append(newTableView.render().el);
                     this.subViews.push(newTableView);
                     break;
                 case 1:

@@ -1,12 +1,13 @@
 define([
     'jquery',
     'underscore',
-    'backbone'
+    'backbone',
+    'text!templates/state.data.template.html'
 ], function(
     $,_,Backbone
 ){
     var StateDataView = Backbone.View.extend({
-        className: 'row border_top_gray',
+        //className: 'row border_top_gray',
         //template:_.template(Template),
         initialize: function(options) {
             this.debugName = 'table view';
@@ -28,27 +29,43 @@ define([
             //debugger;
             _.each(this.columns,function(c){
                 console.log(c.displayName);
-            //    this.hasData = false;
-            //    var isString = false;
-                var dp = {};
-            //    var numNoData = 0;
                 switch(c.displayName) {
                     case 'state name':
-                        dp.value = this.model.get('name');
-                        console.log("state: " + dp.value);
-                        //this.hasData = true;
-                        //isString = true;
                         var d = document.createElement('div');
                         d.className = 'span' + this.columns.length + 'col rowCell left';
-                        d.innerHTML = dp.value;
+                        d.innerHTML = this.model.get('name');
                         frag.appendChild(d);
-                        console.log(frag);
-                        debugger;
+                        //console.log(frag);
+                        //debugger;
+                        break;
+                    case 'insured':
+                        var d = document.createElement('div');
+                        d.className = 'span' + this.columns.length + 'col rowCell left';
+                        d.innerHTML = this.model.get('number_insured');
+                        frag.appendChild(d);
+                        //console.log(frag);
+                        //debugger;
+                        break;
+                    case 'uninsured':
+                        var d = document.createElement('div');
+                        d.className = 'span' + this.columns.length + 'col rowCell left';
+                        d.innerHTML = this.model.get('number_uninsured');
+                        frag.appendChild(d);
+                        //console.log(frag);
+                        //debugger;
+                        break;
+                    case 'population':
+                        var d = document.createElement('div');
+                        d.className = 'span' + this.columns.length + 'col rowCell left';
+                        d.innerHTML = this.model.get('population');
+                        frag.appendChild(d);
+                        //console.log(frag);
                         break;
                     default:
                         console.log("at default");
                 }
-                this.$('.rowData').append(frag);
+                //debugger;
+                $(this.el).append(frag);
             },this);
             //
             ////this.$('.partShowMore').attr('data','&m=' + this.columns[1].type + '&t=' + this.columns[1].name);

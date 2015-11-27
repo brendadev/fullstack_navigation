@@ -29,13 +29,7 @@ define([
                 {displayName: "insured"},
                 {displayName: "uninsured"},
                 {displayName: "population"}];
-            //debugger;
 
-            //this.$('.partShowMore').attr('data','&m=' + this.columns[1].type + '&t=' + this.columns[1].name);
-            //this.$('.rowData').append(frag);
-            //console.log(this.data.models);
-            //this.data.each
-            //_.each(this.data.models,function (p) {
             this.data.each(function(p){
                 console.log(p);
                 var smv = new StateDataView({
@@ -45,7 +39,7 @@ define([
                 frag.appendChild(smv.render().el);
                 this.subViews.push(smv);
             }, this);
-            this.$('.rowData').append(frag);
+            this.$('.rowIcon').append(frag);
         }
     });
     return StateTableView;

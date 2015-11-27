@@ -33,15 +33,17 @@ define([
 
             //this.$('.partShowMore').attr('data','&m=' + this.columns[1].type + '&t=' + this.columns[1].name);
             //this.$('.rowData').append(frag);
-            console.log(this.data.models);
-            _.each(this.data.models,function (p) {
+            //console.log(this.data.models);
+            //this.data.each
+            //_.each(this.data.models,function (p) {
+            this.data.each(function(p){
                 console.log(p);
-                //var smv = new StateDataView({
-                //    model: p,
-                //    columns: this.columns
-                //});
-                //frag.appendChild(smv.render().el);
-                //this.subViews.push(smv);
+                var smv = new StateDataView({
+                    model: p,
+                    columns: this.columns
+                });
+                frag.appendChild(smv.render().el);
+                this.subViews.push(smv);
             }, this);
             this.$('.rowData').append(frag);
         }

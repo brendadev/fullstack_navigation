@@ -70,8 +70,8 @@ define([
                     var newGraphView = new InsuranceGraphView({collection: this.insuranceData,graphTypeOption: "line"});
                     this.$('.graph').append(newGraphView.render().el);
                     this.subViews.push(newGraphView);
-                    var newTableView = TableView({collection: this.insuranceData});
-                    this.$('.participantList').append(newTableView.render().el);
+                    var newTableView = new TableView({collection: this.insuranceData});
+                    this.$('.rowData').append(newTableView.render().el);
                     this.subViews.push(newTableView);
                     break;
                 case 1:

@@ -19,6 +19,7 @@ define([
         },
         showData:function() {
             var frag = document.createDocumentFragment();
+            debugger;
             //_.each(this.columns,function(c){
             //    this.hasData = false;
             //    var isString = false;

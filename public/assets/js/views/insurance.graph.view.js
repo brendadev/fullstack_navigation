@@ -173,6 +173,7 @@ define([
                             }
                         }
                     },
+                    //RE: nice use of map function - well done
                     series: [{
                         name: 'Insured',
                         data: this.dataPoints.map(function(obj) { return obj.stateIns; })

@@ -39,6 +39,15 @@ define([
             this.subViews = new Array();
             this.programIndex = 0;
         },
+        //RE: I realize you don't explicity need the render:function() code
+        //RE: I would still include it though because you call it implicitly
+        //RE: when you render this view
+        //RE: in practice your code uses procData in place of render:function()
+        //RE: it would be better to have the render:function() run the template
+        //RE: then have procData as its own method
+        //RE: this means that if there is an error in data processing the render function
+        //RE: still runs and presents something on the screen for the user
+        //RE: it can this display errors in data processing if needed independent of procData
         procData: function(){
             //console.log("2.at procData");
             $(this.el).html(this.template());
@@ -67,6 +76,9 @@ define([
                 case 0:
                     console.log("Chart + table view");
                     // instantiate views
+                    //RE: declare var newGraphView once at top
+                    //RE: it is being declared new each case statement
+                    //RE: admittedly I do this myself sometimes but shouldn't as it can lead to overwriting
                     var newGraphView = new InsuranceGraphView({collection: this.insuranceData,graphTypeOption: "line"});
                     this.$('.graph').append(newGraphView.render().el);
                     this.subViews.push(newGraphView);
@@ -76,6 +88,9 @@ define([
                     this.subViews.push(newTableView);
                     break;
                 case 1:
+                    //RE: fyi console.log should only be used temporarily
+                    //RE: it can break IE if the IE debugger isn't running
+                    //RE: window.utils.output checks for this potential error
                     console.log("Chart + map view");
                     newGraphView = new InsuranceGraphView({collection: this.insuranceData,graphTypeOption: "bar"});
                     this.$('.graph').append(newGraphView.render().el);

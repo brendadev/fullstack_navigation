@@ -45,6 +45,8 @@ define([
             return this;
         },
         resetMenu:function() {
+            //RE: in general I would remove code that is copy/pasted but isn't going to be used
+            //RE: like this code - it improves readability over time
             switch(this.active) {
                 case 'profile':
                     this.$('.side_menu_programs').addClass('active');

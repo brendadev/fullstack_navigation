@@ -22,7 +22,6 @@ define([
                 };
             } else {
                 var click = {
-                    'click .connectDevices'             : 'connectDevices',
                     'click .userMenu'                   : 'showMenu',
                     'mouseleave .userDropDown'          : 'hideMenu'
                 };
@@ -41,48 +40,11 @@ define([
             this.$('.side_menu_forums').attr('href','/insurance/?view=table');
             this.$('.side_menu_surveys').attr('href','/insurance/?view=map');
             this.$('.accountSettings').attr('href','/insurance/?view=account');
-            this.resetMenu();
+            //this.resetMenu();
             return this;
         },
-        resetMenu:function() {
-            //RE: in general I would remove code that is copy/pasted but isn't going to be used
-            //RE: like this code - it improves readability over time
-            switch(this.active) {
-                case 'profile':
-                    this.$('.side_menu_programs').addClass('active');
-                    break;
-                case 'surveys':
-                    this.$('.side_menu_surveys').addClass('active');
-                    break;
-                case 'participants':
-                    this.$('.side_menu_participants').addClass('active');
-                    break;
-                case 'messages':
-                    this.$('.side_menu_messages').addClass('active');
-                    break;
-                case 'forums':
-                    this.$('.side_menu_forums').addClass('active');
-                    break;
-                case 'measurements':
-                    this.$('.side_menu_measurements').addClass('active');
-                    break;
-                case 'support':
-                    this.$('.side_menu_support').addClass('active');
-                    break;
-                case 'account':
-                    this.$('.userMenuDropDown').show();
-                    this.$('.accountSettings').addClass('active');
-                    break;
-                default:
-            }
-        },
-        connectDevices:function() {
-            var that = this;
-            var opts = {};
-            this.hideMenu();
-        },
         hideMenu:function() {
-            this.resetMenu();
+            //this.resetMenu();
             this.$('.userMenu').removeClass('active');
             this.$('.userMenuDropDown').slideUp();
             this.$('.toggleUserMenu').removeClass('fa-chevron-up').addClass('fa-chevron-down');

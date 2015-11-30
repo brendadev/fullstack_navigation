@@ -48,6 +48,9 @@ define([
         //RE: this means that if there is an error in data processing the render function
         //RE: still runs and presents something on the screen for the user
         //RE: it can this display errors in data processing if needed independent of procData
+        render: function(){
+            return this;
+        },
         procData: function(){
             //console.log("2.at procData");
             $(this.el).html(this.template());
@@ -72,18 +75,20 @@ define([
             window.utils.output(this.debugName, 'selected program index is ' + this.programIndex);
             this.programIndex = this.$('#selectProgram')[0].selectedIndex;
             this.cleanUI();
+            var newGraphView;
+            var newTableView;
             switch(parseInt(this.programIndex)){
                 case 0:
-                    console.log("Chart + table view");
+                    //console.log("Chart + table view");
                     // instantiate views
                     //RE: declare var newGraphView once at top
                     //RE: it is being declared new each case statement
                     //RE: admittedly I do this myself sometimes but shouldn't as it can lead to overwriting
-                    var newGraphView = new InsuranceGraphView({collection: this.insuranceData,graphTypeOption: "line"});
+                    newGraphView = new InsuranceGraphView({collection: this.insuranceData,graphTypeOption: "line"});
                     this.$('.graph').append(newGraphView.render().el);
                     this.subViews.push(newGraphView);
                     //debugger;
-                    var newTableView = new TableView({collection: this.insuranceData});
+                    newTableView = new TableView({collection: this.insuranceData});
                     this.$('.participantList').append(newTableView.render().el);
                     this.subViews.push(newTableView);
                     break;
@@ -91,7 +96,7 @@ define([
                     //RE: fyi console.log should only be used temporarily
                     //RE: it can break IE if the IE debugger isn't running
                     //RE: window.utils.output checks for this potential error
-                    console.log("Chart + map view");
+                    //console.log("Chart + map view");
                     newGraphView = new InsuranceGraphView({collection: this.insuranceData,graphTypeOption: "bar"});
                     this.$('.graph').append(newGraphView.render().el);
                     this.subViews.push(newGraphView);
@@ -104,12 +109,12 @@ define([
             //the previous one, so a new one could be rendered
         },
         loadView: function(){
-            console.log("at loadView");
+            //console.log("at loadView");
             //window.utils.output(this.debugName, 'selected program index is ' + this.programIndex);
             //this.programIndex = this.$('#selectProgram')[0].selectedIndex;
-            console.log("load single view");
+            //console.log("load single view");
             //this.cleanUI();
-            console.log(window.utils.getQueryStringParameter('viewid'));
+            //console.log(window.utils.getQueryStringParameter('viewid'));
             //switch(parseInt(this.programIndex)){
             //    case 0:
             //        console.log("Chart + table view");
@@ -121,7 +126,7 @@ define([
             //}
         },
         cleanUI: function(){
-            console.log("4.at cleanUI");
+            //console.log("4.at cleanUI");
             _.each(this.subViews, function(sv){
                window.utils.cleanView(sv);
             });

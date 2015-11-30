@@ -28,15 +28,14 @@ define([
             //displayName: "population"
             //debugger;
             var d = document.createElement('div');
-            d.className = 'span' + this.columns.length + 'col rowCell left';
             _.each(this.columns,function(c){
-                //console.log(c.displayName);
+                console.log(c.displayName);
                 switch(c.displayName) {
                     case 'state name':
                         //RE: the next 2 lines are repeated so can go above _.each(this.columns...
                         //RE: first to admit I don't always do this myself and should do
                         //var d = document.createElement('div');
-                        //d.className = 'span' + this.columns.length + 'col rowCell left';
+                        d.className = 'span' + this.columns.length + 'col rowCell left';
                         d.innerHTML = this.model.get('name');
                         //RE: I would put this next line outside the switch
                         //RE: so it runs if the switch code works
@@ -46,7 +45,7 @@ define([
                         break;
                     case 'insured':
                         //var d = document.createElement('div');
-                        //d.className = 'span' + this.columns.length + 'col rowCell left';
+                        d.className = 'span' + this.columns.length + 'col rowCell left';
                         d.innerHTML = this.model.get('number_insured');
                         frag.appendChild(d);
                         //console.log(frag);
@@ -54,7 +53,7 @@ define([
                         break;
                     case 'uninsured':
                         //var d = document.createElement('div');
-                        //d.className = 'span' + this.columns.length + 'col rowCell left';
+                        d.className = 'span' + this.columns.length + 'col rowCell left';
                         d.innerHTML = this.model.get('number_uninsured');
                         frag.appendChild(d);
                         //console.log(frag);
@@ -62,7 +61,7 @@ define([
                         break;
                     case 'population':
                         //var d = document.createElement('div');
-                        //d.className = 'span' + this.columns.length + 'col rowCell left';
+                        d.className = 'span' + this.columns.length + 'col rowCell left';
                         d.innerHTML = this.model.get('population');
                         frag.appendChild(d);
                         //console.log(frag);

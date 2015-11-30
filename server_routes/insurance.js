@@ -13,14 +13,31 @@ module.exports = function(app){
         var f = __dirname +'/data/data.json';
         read(f, 'utf8', function(err, buffer) {
             if (err) {
-                console.log(err);
+                //console.log(err);
                 res.send({status:500,message:"failed to load file"});
             } else {
-                console.log("got data");
+                //console.log("got data");
                 var out = JSON.parse(buffer);
                 //data.out contains the top level data, which contains array of data elements
                 //need to do data:out.data to access the array within the parent data
                 res.send({status:200,message:"success",data:out.data});
+            }
+        });
+    });
+    app.get('/data/states',function(req,res){
+        //read('/assets/data/data.json', 'utf8', function(err, buffer) {
+        var f = __dirname +'/data/states.json';
+        read(f, 'utf8', function(err, buffer) {
+            if (err) {
+                //console.log(err);
+                res.send({status:500,message:"failed to load file"});
+            } else {
+                //console.log("got data");
+                var out = JSON.parse(buffer);
+                //data.out contains the top level data, which contains array of data elements
+                //need to do data:out.data to access the array within the parent data
+                //console.log(out.states.state);
+                res.send({status:200,message:"success",data:out.states.state});
             }
         });
     });

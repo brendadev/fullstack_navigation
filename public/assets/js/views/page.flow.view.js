@@ -101,6 +101,9 @@ define([
                     newGraphView = new InsuranceGraphView({collection: this.insuranceData,graphTypeOption: "bar"});
                     this.$('.graph').append(newGraphView.render().el);
                     this.subViews.push(newGraphView);
+                    var newMapView = new MapView({collection: this.insuranceData});
+                    this.$('.map').append(newMapView.render().el);
+                    this.subViews.push(newMapView);
                     break;
                 default:
             }

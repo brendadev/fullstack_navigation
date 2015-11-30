@@ -6,10 +6,11 @@ define([
     'collections/insurance.data.collection',
     'views/insurance.graph.view',
     'views/table.view',
+    'views/map.view',
     'text!templates/page.flow.template.html'
 ],function(
     $,_,Backbone,Moment,InsuranceDataCollection,
-    InsuranceGraphView, TableView, Template
+    InsuranceGraphView, TableView, MapView, Template
     ){
     var PageFlowView = Backbone.View.extend({
         className: 'profile clear pb',
@@ -76,7 +77,7 @@ define([
             this.programIndex = this.$('#selectProgram')[0].selectedIndex;
             this.cleanUI();
             var newGraphView;
-            var newTableView;
+            //var newTableView;
             switch(parseInt(this.programIndex)){
                 case 0:
                     //console.log("Chart + table view");
@@ -88,7 +89,7 @@ define([
                     this.$('.graph').append(newGraphView.render().el);
                     this.subViews.push(newGraphView);
                     //debugger;
-                    newTableView = new TableView({collection: this.insuranceData});
+                    var newTableView = new TableView({collection: this.insuranceData});
                     this.$('.participantList').append(newTableView.render().el);
                     this.subViews.push(newTableView);
                     break;

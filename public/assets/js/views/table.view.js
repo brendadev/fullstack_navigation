@@ -31,7 +31,7 @@ define([
                 {displayName: "population"}];
 
             this.data.each(function(p){
-                console.log(p);
+                //console.log(p);
                 var smv = new StateDataView({
                     model: p,
                     columns: this.columns

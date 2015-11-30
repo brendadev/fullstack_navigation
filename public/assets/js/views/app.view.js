@@ -23,6 +23,11 @@ define([
             this.subViews = new Array();
             this.procData();
         },
+        render: function () {
+            //var insuranceView = new InsuranceView();
+            //this.$('main').append(insuranceView.render().el);
+            return this;
+        },
         procData:function(){
             _.each(this.subViews, function(v){
                 window.utils.cleanView(v);
@@ -53,18 +58,13 @@ define([
             this.subViews.push(pageFlowView);
 
             this.$('.main').append(pageFlowView.render().el);
-        },
+        }
         //RE: I would always put the render function after the initialize function
         //RE: because it is a standard backbone method
         //RE: initialize and render are the only backbone methods
         //RE: this means that all the view specific code follows the standard code
         //RE: which in long lines of code improves readability
 
-        render: function () {
-            //var insuranceView = new InsuranceView();
-            //this.$('main').append(insuranceView.render().el);
-            return this;
-        }
     });
     return AppView;
 });

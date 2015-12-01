@@ -13,6 +13,7 @@ define([
         className: "panel koneksa_bg_white boxShadow mlrt",
         template:_.template(Template),
         initialize:function(options) {
+            this.width = options.width;
             this.hdata = options.collection;
             this.states = new StatesDataCollection();
             this.states.bind('sync',this.procData,this);
@@ -99,8 +100,8 @@ define([
             //to store the parent context and can access it inside document.ready
             //which is an anonymous closure
             var _this = this;
-            //console.log(_this);
-            //map code goes here
+            var map;
+            $(_this.el).css('width',_this.width);
             $(document).ready(function() {
                 var styles = [
                     {
@@ -114,7 +115,8 @@ define([
                 map = new google.maps.Map(document.getElementById('gmap'), {
                     zoom: 4,
                     center: {lat: 38, lng: -95},
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    styles: styles
                 });
                 //the percent insured data are all very close in size so we need to define
                 //a shading scale the spreads out the shades of the polygons across this small

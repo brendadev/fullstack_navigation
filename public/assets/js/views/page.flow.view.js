@@ -101,9 +101,18 @@ define([
                     newGraphView = new InsuranceGraphView({collection: this.insuranceData,graphTypeOption: "bar"});
                     this.$('.graph').append(newGraphView.render().el);
                     this.subViews.push(newGraphView);
-                    var newMapView = new MapView({collection: this.insuranceData});
-                    this.$('.map').append(newMapView.render().el);
-                    this.subViews.push(newMapView);
+
+                    var w = window.utils.screenSize().width;
+                    debugger;
+                    // var newMapView = new MapView({collection: this.insuranceData});
+                    var svm = new MapView(
+                        {
+                            collection: this.insuranceData,
+                            width:      w
+                        }
+                    );
+                    this.$('.map').append(svm.render().el);
+                    this.subViews.push(svm);
                     break;
                 default:
             }

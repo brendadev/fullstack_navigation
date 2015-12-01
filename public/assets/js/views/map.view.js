@@ -115,7 +115,7 @@ define([
                 ];
                 map = new google.maps.Map(document.getElementById('gmap'), {
                     zoom: 4,
-                    center: {lat: 38, lng: -95},
+                    center: {lat: 43, lng: -95},
                     mapTypeId: google.maps.MapTypeId.ROADMAP,
                     styles: styles
                 });

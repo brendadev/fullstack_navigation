@@ -3,21 +3,23 @@ define([
     'underscore',
     'backbone',
     'collections/states.data.collection',
+    'text!templates/map.view.template.html',
     'highchart'
 ], function(
     $,_,Backbone,
-    StatesDataCollection, Highchart
+    StatesDataCollection, Template, Highchart
 ){
     var MapView = Backbone.View.extend({
-        el:'.map',
+        className: "panel koneksa_bg_white boxShadow mlrt",
+        template:_.template(Template),
         initialize:function(options) {
-            //var _this = this;
             this.hdata = options.collection;
             this.states = new StatesDataCollection();
             this.states.bind('sync',this.procData,this);
             this.states.fetch();
         },
         render: function() {
+            $(this.el).html(this.template());
             return this;
         },
         procData:function() {
@@ -99,7 +101,6 @@ define([
             var _this = this;
             //console.log(_this);
             //map code goes here
-
             $(document).ready(function() {
                 var styles = [
                     {
@@ -110,12 +111,11 @@ define([
                         ]
                     }
                 ];
-                _this.map = new google.maps.Map(document.getElementById('map'), {
+                map = new google.maps.Map(document.getElementById('gmap'), {
                     zoom: 4,
                     center: {lat: 38, lng: -95},
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 });
-
                 //the percent insured data are all very close in size so we need to define
                 //a shading scale the spreads out the shades of the polygons across this small
                 //range - otherwise (as found out first time I ran the code)
@@ -142,8 +142,9 @@ define([
                     _this.mapPoly.push(poly);
                 });
                 _.each(_this.mapPoly,function(poly){
-                    poly.setMap(_this.map);
+                    poly.setMap(map);
                 });
+
             });
         }
     });

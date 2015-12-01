@@ -17,7 +17,7 @@ define([
         template: _.template(Template),
         events:function(){
             var base = {
-                'change #selectProgram': 'loadProgram'
+                'change #selectProgram': 'loadSelectedView'
             };
             if (window.utils.isTouch()){
                 var click = {
@@ -40,15 +40,6 @@ define([
             this.subViews = new Array();
             this.programIndex = 0;
         },
-        //RE: I realize you don't explicity need the render:function() code
-        //RE: I would still include it though because you call it implicitly
-        //RE: when you render this view
-        //RE: in practice your code uses procData in place of render:function()
-        //RE: it would be better to have the render:function() run the template
-        //RE: then have procData as its own method
-        //RE: this means that if there is an error in data processing the render function
-        //RE: still runs and presents something on the screen for the user
-        //RE: it can this display errors in data processing if needed independent of procData
         render: function(){
             return this;
         },
@@ -56,25 +47,32 @@ define([
             //console.log("2.at procData");
             $(this.el).html(this.template());
 
-            //calculate insurance/uninsured values
             this.insuranceData.each(function(model){
                 model.set({'percentUninsured': (model.attributes.number_uninsured/model.attributes.population)*100});
                 model.set({'percentInsured': (model.attributes.number_insured/model.attributes.population)*100});
             },this);
-            //console.log(this.insuranceData);
-            if (window.utils.getQueryStringParameter('viewid') != '') {
-                this.programIndex=window.utils.getQueryStringParameter('viewid');
-                this.loadView();
+
+            if (window.utils.getQueryStringParameter('v') != '') {
+                this.loadFromQueryString();
             } else {
                 this.loadProgram();
             }
-            //this.loadProgram();
+
             return this;
+        },
+        loadSelectedView:function() {
+            this.programIndex = this.$('#selectProgram')[0].selectedIndex;
+            this.loadProgram();
+        },
+        loadFromQueryString:function() {
+            this.$('#selectProgram').val(window.utils.getQueryStringParameter('v'));
+            this.programIndex = this.$('#selectProgram')[0].selectedIndex;
+            this.loadProgram();
         },
         loadProgram: function(){
             //console.log("3.at loadProgram");
             window.utils.output(this.debugName, 'selected program index is ' + this.programIndex);
-            this.programIndex = this.$('#selectProgram')[0].selectedIndex;
+
             this.cleanUI();
             var newGraphView;
             //var newTableView;
@@ -102,17 +100,21 @@ define([
                     this.$('.graph').append(newGraphView.render().el);
                     this.subViews.push(newGraphView);
 
-                    var w = window.utils.screenSize().width;
-                    debugger;
-                    // var newMapView = new MapView({collection: this.insuranceData});
-                    var svm = new MapView(
-                        {
-                            collection: this.insuranceData,
-                            width:      w
-                        }
-                    );
-                    this.$('.map').append(svm.render().el);
-                    this.subViews.push(svm);
+                    //var w = window.utils.screenSize().width;
+                    //debugger;
+                    //// var newMapView = new MapView({collection: this.insuranceData});
+                    //var svm = new MapView(
+                    //    {
+                    //        collection: this.insuranceData,
+                    //        width:      w
+                    //    }
+                    //);
+                    //this.$('.map').append(svm.render().el);
+                    //this.subViews.push(svm);
+
+                    var newMapView = new MapView({collection: this.insuranceData});
+                    this.$('.map').append(newMapView.render().el);
+                    this.subViews.push(newMapView);
                     break;
                 default:
             }
@@ -120,23 +122,6 @@ define([
             //so that these views can be all cleared with cleanUI
             //in this case, I used this technique to track the graphs and be able to remove
             //the previous one, so a new one could be rendered
-        },
-        loadView: function(){
-            //console.log("at loadView");
-            //window.utils.output(this.debugName, 'selected program index is ' + this.programIndex);
-            //this.programIndex = this.$('#selectProgram')[0].selectedIndex;
-            //console.log("load single view");
-            //this.cleanUI();
-            //console.log(window.utils.getQueryStringParameter('viewid'));
-            //switch(parseInt(this.programIndex)){
-            //    case 0:
-            //        console.log("Chart + table view");
-            //        break;
-            //    case 1:
-            //        console.log("Chart + map view");
-            //        break;
-            //    default:
-            //}
         },
         cleanUI: function(){
             //console.log("4.at cleanUI");

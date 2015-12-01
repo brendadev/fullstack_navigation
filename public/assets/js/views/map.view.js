@@ -100,9 +100,10 @@ define([
             //to store the parent context and can access it inside document.ready
             //which is an anonymous closure
             var _this = this;
-            var map;
-            $(_this.el).css('width',_this.width);
             $(document).ready(function() {
+                //var w = window.utils.screenSize().width;
+                //$(_this.el).css('width',w + 'px');
+
                 var styles = [
                     {
                         featureType: "all",
@@ -118,6 +119,7 @@ define([
                     mapTypeId: google.maps.MapTypeId.ROADMAP,
                     styles: styles
                 });
+
                 //the percent insured data are all very close in size so we need to define
                 //a shading scale the spreads out the shades of the polygons across this small
                 //range - otherwise (as found out first time I ran the code)
@@ -146,7 +148,19 @@ define([
                 _.each(_this.mapPoly,function(poly){
                     poly.setMap(map);
                 });
-
+                //$('.map').resize(function(){
+                //    google.maps.event.trigger(map, 'resize');
+                //});
+                //var center = map.getCenter();
+                //google.maps.event.trigger(map,'resize');
+                //map.setCenter(center);
+                //debugger;
+                document.getElementById('gmap').style.width = $('.graph').width() + 'px';
+                var center = map.getCenter();
+                window.onresize = function(){
+                    google.maps.event.trigger(map,'resize');
+                    map.setCenter(center);
+                };
             });
         }
     });

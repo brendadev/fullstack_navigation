@@ -35,11 +35,8 @@ define([
         render: function() {
             $(this.el).html(this.template());
             this.$('.indSideMenu').show();
-            this.$('.side_menu_programs').attr('href','/insurance/?view=linegraph');
-            this.$('.side_menu_fooddiary').attr('href','/insurance/?view=bargraph');
-            this.$('.side_menu_forums').attr('href','/insurance/?view=table');
-            this.$('.side_menu_surveys').attr('href','/insurance/?view=map');
-            this.$('.accountSettings').attr('href','/insurance/?view=account');
+            this.$('.side_menu_programs').attr('href','/insurance/?v=program1');
+            this.$('.side_menu_fooddiary').attr('href','/insurance/?v=program2');
             //this.resetMenu();
             return this;
         },

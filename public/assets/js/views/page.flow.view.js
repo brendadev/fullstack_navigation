@@ -40,11 +40,10 @@ define([
             this.programIndex = 0;
         },
         render: function(){
+            $(this.el).html(this.template());
             return this;
         },
         procData: function(){
-            $(this.el).html(this.template());
-
             this.insuranceData.each(function(model){
                 model.set({'percentUninsured': (model.attributes.number_uninsured/model.attributes.population)*100});
                 model.set({'percentInsured': (model.attributes.number_insured/model.attributes.population)*100});

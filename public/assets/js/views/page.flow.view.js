@@ -32,7 +32,6 @@ define([
             return base;
         },
         initialize: function(){
-            //console.log("1.at initialize");
             this.debugName = 'page flow view';
             this.insuranceData = new InsuranceDataCollection();
             this.insuranceData.bind('sync',this.procData,this);
@@ -44,7 +43,6 @@ define([
             return this;
         },
         procData: function(){
-            //console.log("2.at procData");
             $(this.el).html(this.template());
 
             this.insuranceData.each(function(model){
@@ -70,18 +68,16 @@ define([
             this.loadProgram();
         },
         loadProgram: function(){
-            //console.log("3.at loadProgram");
             window.utils.output(this.debugName, 'selected program index is ' + this.programIndex);
-
             this.cleanUI();
             var newGraphView;
-            //var newTableView;
+
             switch(parseInt(this.programIndex)){
                 case 0:
                     newGraphView = new InsuranceGraphView({collection: this.insuranceData,graphTypeOption: "line"});
                     this.$('.graph').append(newGraphView.render().el);
                     this.subViews.push(newGraphView);
-                    //debugger;
+
                     var newTableView = new TableView({collection: this.insuranceData});
                     this.$('.participantList').append(newTableView.render().el);
                     this.subViews.push(newTableView);
@@ -98,13 +94,8 @@ define([
                     break;
                 default:
             }
-            //seems like the subViews is used to keep track of which views are being rendered,
-            //so that these views can be all cleared with cleanUI
-            //in this case, I used this technique to track the graphs and be able to remove
-            //the previous one, so a new one could be rendered
         },
         cleanUI: function(){
-            //console.log("4.at cleanUI");
             _.each(this.subViews, function(sv){
                window.utils.cleanView(sv);
             });

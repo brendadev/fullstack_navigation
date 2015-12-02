@@ -10,7 +10,8 @@ define([
     StatesDataCollection, Template, Highchart
 ){
     var MapView = Backbone.View.extend({
-        className: "panel koneksa_bg_white boxShadow mlrt",
+        //className: "panel koneksa_bg_white boxShadow mlrt",
+        className: "map",
         template:_.template(Template),
         initialize:function(options) {
             this.width = options.width;
@@ -155,7 +156,7 @@ define([
                 //google.maps.event.trigger(map,'resize');
                 //map.setCenter(center);
                 //debugger;
-                document.getElementById('gmap').style.width = $('.graph').width() + 'px';
+                document.getElementById('gmap').style.width = $('.panel').width() + 'px';
                 var center = map.getCenter();
                 window.onresize = function(){
                     google.maps.event.trigger(map,'resize');

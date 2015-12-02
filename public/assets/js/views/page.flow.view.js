@@ -113,7 +113,7 @@ define([
                     //this.subViews.push(svm);
 
                     var newMapView = new MapView({collection: this.insuranceData});
-                    this.$('.map').append(newMapView.render().el);
+                    this.$('.other').append(newMapView.render().el);
                     this.subViews.push(newMapView);
                     break;
                 default:

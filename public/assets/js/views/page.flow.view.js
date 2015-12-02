@@ -78,11 +78,6 @@ define([
             //var newTableView;
             switch(parseInt(this.programIndex)){
                 case 0:
-                    //console.log("Chart + table view");
-                    // instantiate views
-                    //RE: declare var newGraphView once at top
-                    //RE: it is being declared new each case statement
-                    //RE: admittedly I do this myself sometimes but shouldn't as it can lead to overwriting
                     newGraphView = new InsuranceGraphView({collection: this.insuranceData,graphTypeOption: "line"});
                     this.$('.graph').append(newGraphView.render().el);
                     this.subViews.push(newGraphView);
@@ -92,25 +87,10 @@ define([
                     this.subViews.push(newTableView);
                     break;
                 case 1:
-                    //RE: fyi console.log should only be used temporarily
-                    //RE: it can break IE if the IE debugger isn't running
-                    //RE: window.utils.output checks for this potential error
-                    //console.log("Chart + map view");
+
                     newGraphView = new InsuranceGraphView({collection: this.insuranceData,graphTypeOption: "bar"});
                     this.$('.graph').append(newGraphView.render().el);
                     this.subViews.push(newGraphView);
-
-                    //var w = window.utils.screenSize().width;
-                    //debugger;
-                    //// var newMapView = new MapView({collection: this.insuranceData});
-                    //var svm = new MapView(
-                    //    {
-                    //        collection: this.insuranceData,
-                    //        width:      w
-                    //    }
-                    //);
-                    //this.$('.map').append(svm.render().el);
-                    //this.subViews.push(svm);
 
                     var newMapView = new MapView({collection: this.insuranceData});
                     this.$('.other').append(newMapView.render().el);

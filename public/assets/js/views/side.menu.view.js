@@ -17,7 +17,7 @@ define([
             };
             if (window.utils.isTouch()) {
                 var click = {
-                    'touchstart .connectDevices'    : 'connectDevices',
+                    //'touchstart .connectDevices'    : 'connectDevices',
                     'touchstart .userMenu'          : 'showMenu'
                 };
             } else {
@@ -37,7 +37,6 @@ define([
             this.$('.indSideMenu').show();
             this.$('.side_menu_programs').attr('href','/insurance/?v=program1');
             this.$('.side_menu_fooddiary').attr('href','/insurance/?v=program2');
-            //this.resetMenu();
             return this;
         },
         hideMenu:function() {

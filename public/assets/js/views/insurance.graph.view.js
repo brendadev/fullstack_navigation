@@ -113,6 +113,7 @@ define([
                         type: 'spline'
                     }]
                 });
+                //this.resizeGraph();
             }
             else if (this.graphType == "bar"){
                 $(this.el).highcharts({
@@ -182,8 +183,15 @@ define([
                         data: this.dataPoints.map(function(obj) { return obj.stateUnins; })
                     }]
                 });
+            //this.resizeGraph();
             }
-        }
+        }//,
+        //resizeGraph: function(){
+        //    window.onresize = function(){
+        //        var chart=$('.container').highcharts();
+        //        chart.setSize(('$.graph').width(),$('.container').height(),true);
+        //    };
+        //}
     });
     return TemplateView;
 });

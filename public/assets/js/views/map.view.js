@@ -25,8 +25,7 @@ define([
             return this;
         },
         procData:function() {
-            // Create array from collection's name attributes
-            //var xlabels = new Array();
+
             var plotData = [];
             this.hdata.each(function(model){
                 plotData.push({
@@ -36,12 +35,8 @@ define([
                     stateUnins: model.get('number_uninsured')
                 });
             },this);
-            //console.log(plotData);
-            //debugger;
+
             plotData.sort(function(a,b){
-                //console.log(a);
-                //console.log(a.statePop);
-                //console.log(typeof(a.population));
                 if(a.statePop < b.statePop){
                     return 1;
                 }
@@ -50,11 +45,6 @@ define([
                 }
                 return 0;
             });
-            //console.log(plotData);
-            //debugger;
-
-            //first step is to initialize required map arrays in correct format
-            //second step is to fill the arrays by iterating through the hdata models
 
             var categories = new Array();
             var series = new Array();
@@ -72,8 +62,6 @@ define([
                 series[1].data.push(d.get('number_insured'));
                 series[2].data.push(d.get('number_uninsured'));
             },this);
-            //console.log(this.hdata);
-            //debugger;
 
             var polygons = new Array();
             this.states.each(function(s){
@@ -149,13 +137,7 @@ define([
                 _.each(_this.mapPoly,function(poly){
                     poly.setMap(map);
                 });
-                //$('.map').resize(function(){
-                //    google.maps.event.trigger(map, 'resize');
-                //});
-                //var center = map.getCenter();
-                //google.maps.event.trigger(map,'resize');
-                //map.setCenter(center);
-                //debugger;
+              
                 document.getElementById('gmap').style.width = $('.panel').width() + 'px';
                 var center = map.getCenter();
                 window.onresize = function(){
